@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garrett McAvoy</title>
+    <style>
+        body {
+            margin: 25px;
+        }
+
+        h1 {
+            margin-top: 0px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-top: 0px;
+            margin-bottom: 5px;
+        }
+        
+        .container {
+            display: flex;
+            justify-content: space-between;
+            flex-direction:row;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .item {
+            flex: 1;
+            margin-top: 0px;
+        }
+        @media (orientation: portrait) {
+            .item img {
+                margin: 0 auto;
+                max-width:90vw;
+                height: auto;
+            }
+        }    
+        @media (orientation: landscape) {
+            .item img {
+                margin: 0px;
+                max-width:800px;
+                height: auto;
+            }
+        }    
+        .dropdown-container {
+            margin-top: 0px; /* Add some space above each dropdown */
+            margin-bottom: 5px;
+        }
+
+        .dropdown-toggle {
+            cursor: pointer;
+            color: black;
+            text-decoration: none;
+            display: inline; /* Ensure the clickable area is just the width of the text */
+        }
+
+        .dropdown-toggle:hover {
+            color: gray;
+        }
+
+        .dropdown-container.open .dropdown-toggle {
+            color: grey;
+        }
+
+        .dropdown-content {
+            display: none; /* Hidden by default */
+            margin-top: 10px;
+            padding-left: 30px; /* Adjust padding as needed */
+            max-width: 300px;
+        }
+
+        .dropdown-container.open .dropdown-content {
+            display: block;
+        }
+
+        a {
+            color: black; /* Default link color */
+            text-decoration: none; /* No underline by default */
+        }
+
+        a:hover {
+            color:grey; /* Blue color when hovered */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="item">
+            <h1>Garrett McAvoy</h1>
+            <p><a href="https://en.wikipedia.org/wiki/California" target="_blank">California, USA</a></p>
+            <p><a href="mailto:garrettmcavoy@gmail.com">garrettmcavoy@gmail.com</a></p>
+            <div class="dropdown-container">
+                <br>
+                <br>
+                <div class="dropdown-toggle">Experience</div>
+                <div class="dropdown-content">
+                    <p>Apple - Internship, Manufacturing Design Engineer</p>
+                    <p>WL Gore & Associates - Internship, Design & Automation Engineer</p>
+                </div>
+            </div>
+            <div class="dropdown-container">
+                <div class="dropdown-toggle">Photography</div>
+                <div class="dropdown-content">
+                    <p><a href="https://garrettmcavoy.github.io/murex" target="_blank">Murex</a></p>
+                </div>
+            </div>
+            <div class="dropdown-container">
+                <div class="dropdown-toggle">Other Projects</div>
+                <div class="dropdown-content">
+                    <p><a href="https://garrettmcavoy.github.io/murex" target="_blank">Murex</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="img.jpeg" alt="Your Image">
+        </div>
+    </div>
+</body>
+    
+    <script>
+        const toggles = document.querySelectorAll('.dropdown-toggle');
+        
+        toggles.forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const container = toggle.parentElement;
+                const isOpen = container.classList.contains('open');
+                container.classList.toggle('open', !isOpen);
+            });
+        });
+    </script>
+</body>
+
+</html>
