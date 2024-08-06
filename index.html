@@ -88,7 +88,7 @@
 
         /* Styles for open dropdowns and tapped links on all devices */
         .dropdown-container.open .dropdown-toggle,
-        a.tapped {
+        a:active {
             color: grey;
         }
 
@@ -133,7 +133,6 @@
     
     <script>
         const toggles = document.querySelectorAll('.dropdown-toggle');
-        const links = document.querySelectorAll('a');
         
         toggles.forEach(toggle => {
             toggle.addEventListener('click', function() {
@@ -142,32 +141,6 @@
                 container.classList.toggle('open', !isOpen);
             });
         });
-
-        links.forEach(link => {
-            link.addEventListener('touchstart', function(e) {
-                this.classList.add('tapped');
-            });
-            link.addEventListener('touchend', function(e) {
-                setTimeout(() => {
-                    this.classList.remove('tapped');
-                }, 300); // Remove the class after 300ms
-            });
-        });
-
-        // Detect if it's a touch device
-        const isTouchDevice = 'ontouchstart' in document.documentElement;
-
-        if (isTouchDevice) {
-            links.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault(); // Prevent immediate navigation
-                    this.classList.add('tapped');
-                    setTimeout(() => {
-                        window.location.href = this.href; // Navigate after a short delay
-                    }, 300);
-                });
-            });
-        }
     </script>
 </body>
 </html>
