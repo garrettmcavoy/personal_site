@@ -10,7 +10,6 @@
             height: 100vh; /* Ensure the body takes the full viewport height */
             display: flex;
             flex-direction: column;
-            justify-content: space-between; /* Push content to top and bottom */
         }
 
         h1 {
@@ -28,6 +27,7 @@
             flex-direction: column;
             gap: 20px;
             flex: 1; /* Allow the container to take available space */
+            position: relative; /* Required for absolute positioning of the image */
         }
 
         .item {
@@ -38,16 +38,23 @@
             max-width: 100%;
             height: auto;
             border-radius: 1vw;
+            position: absolute; /* Position the image at the bottom */
+            bottom: 0;
         }
         
         @media (orientation: portrait) {
             .container {
                 flex-direction: column;
-                justify-content: flex-end; /* Push content to bottom */
+                justify-content: flex-start; /* Align text at the top */
             }
-            .item:last-child {
-                order: 1;
-                margin-bottom: 25px;
+
+            .item:last-child img {
+                max-width: calc(100vw - 50px); /* Ensure image is within viewport margins */
+                margin-left: 25px;
+                margin-right: 25px;
+                position: absolute; /* Position image at the bottom */
+                bottom: 0;
+                left: 0;
             }
         }    
         
@@ -60,6 +67,7 @@
             }
             .item img {
                 max-width: 800px;
+                position: static; /* Ensure image positioning is static in landscape */
             }
         }
 
