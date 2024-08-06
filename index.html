@@ -154,12 +154,20 @@
             });
         });
 
-        // Prevent default touch behavior on links
-        document.addEventListener('touchstart', function(e) {
-            if (e.target.tagName === 'A') {
-                e.preventDefault();
-            }
-        }, {passive: false});
+        // Detect if it's a touch device
+        const isTouchDevice = 'ontouchstart' in document.documentElement;
+
+        if (isTouchDevice) {
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault(); // Prevent immediate navigation
+                    this.classList.add('tapped');
+                    setTimeout(() => {
+                        window.location.href = this.href; // Navigate after a short delay
+                    }, 300);
+                });
+            });
+        }
     </script>
 </body>
 </html>
