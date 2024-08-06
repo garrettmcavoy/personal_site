@@ -45,7 +45,18 @@
                 height: auto;
                 border-radius: 1vw;
             }
-        }    
+        }
+        
+        @media (hover: none) and (pointer: coarse) {
+            a:hover, .dropdown-toggle:hover {
+                color: black; /* Reset color for touch devices */
+             }
+    
+            .dropdown-container.open .dropdown-toggle {
+                color: grey; /* Ensure dropdown open state color is applied */
+            }
+        }
+        
         .dropdown-container {
             margin-top: 0px; /* Add some space above each dropdown */
             margin-bottom: 5px;
@@ -133,29 +144,6 @@
                 container.classList.toggle('open', !isOpen);
             });
         });
-    </script>
-    <script>
-        // Check if the device is touch-enabled
-        function isTouchDevice() {
-            return 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
-        }
-    
-        if (isTouchDevice()) {
-            document.addEventListener('touchstart', function(event) {
-                // Find all links
-                var links = document.querySelectorAll('a');
-    
-                // Iterate over each link
-                links.forEach(function(link) {
-                    // Add an event listener to remove the hover class
-                    link.addEventListener('touchend', function() {
-                        setTimeout(function() {
-                            link.style.color = 'black'; // Reset color after tap
-                        }, 300); // Delay to allow the tap event to process
-                    });
-                });
-            });
-        }
     </script>
     
 </body>
