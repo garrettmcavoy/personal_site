@@ -22,7 +22,7 @@
         .container {
             display: flex;
             justify-content: space-between;
-            flex-direction:row;
+            flex-direction: row;
             flex-wrap: wrap;
             gap: 20px;
         }
@@ -32,18 +32,18 @@
         }
         @media (orientation: portrait) {
             .item img {
-                margin-right: 25px;
-                max-width: calc(100vw - 50px);
+                margin: 0 25px; /* Set left and right margins */
+                max-width: calc(100vw - 50px); /* Ensure the image respects the margins */
                 height: auto;
-                border-radius: 1vw;
+                border-radius: 1vw; /* Rounded corners */
             }
         }    
         @media (orientation: landscape) {
             .item img {
                 margin: 0px;
-                max-width:800px;
+                max-width: 800px;
                 height: auto;
-                border-radius: 1vw;
+                border-radius: 1vw; /* Rounded corners */
             }
         }
         @media (hover: none) and (pointer: coarse) {
@@ -63,12 +63,12 @@
             display: inline; /* Ensure the clickable area is just the width of the text */
         }
 
-        .dropdown-toggle:hover {
+        .dropdown-toggle:hover, .dropdown-toggle.touch-active {
             color: gray;
         }
 
         .dropdown-container.open .dropdown-toggle {
-            color: grey;
+            color: grey; /* Gray color when dropdown is open */
         }
 
         .dropdown-content {
@@ -88,8 +88,8 @@
             text-decoration: none; /* No underline by default */
         }
 
-        a:hover {
-            color:grey; /* Blue color when hovered */
+        a:hover, a.touch-active {
+            color: gray; /* Gray color when hovered or touched */
         }
 
     </style>
@@ -101,8 +101,6 @@
             <p><a href="https://en.wikipedia.org/wiki/California" target="_blank">California, USA</a></p>
             <p><a href="mailto:garrettmcavoy@gmail.com">garrettmcavoy@gmail.com</a></p>
             <div class="dropdown-container">
-                <br>
-                <br>
                 <div class="dropdown-toggle">Experience</div>
                 <div class="dropdown-content">
                     <p>Apple - Internship, Manufacturing Design Engineer</p>
@@ -126,8 +124,7 @@
             <img src="img.jpeg" alt="Your Image">
         </div>
     </div>
-</body>
-    
+
     <script>
         const toggles = document.querySelectorAll('.dropdown-toggle');
         
@@ -137,9 +134,16 @@
                 const isOpen = container.classList.contains('open');
                 container.classList.toggle('open', !isOpen);
             });
+
+            // Handle touch interactions
+            toggle.addEventListener('touchstart', function() {
+                this.classList.add('touch-active');
+            });
+
+            toggle.addEventListener('touchend', function() {
+                setTimeout(() => this.classList.remove('touch-active'), 100);
+            });
         });
     </script>
-    
 </body>
-
 </html>
