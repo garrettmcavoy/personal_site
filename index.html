@@ -21,36 +21,38 @@
         
         .container {
             display: flex;
-            justify-content: space-between;
-            flex-direction:row;
+            flex-direction: row;
             flex-wrap: wrap;
             gap: 20px;
         }
         .item {
-            flex: 1;
-            margin-top: 0px;
+            flex: 1 1 100%;
         }
+        .item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 1vw;
+        }
+        
         @media (orientation: portrait) {
             .container {
                 flex-direction: column;
             }
             .item:last-child {
-                order: 1;
+                order: 2;
                 margin-bottom: 25px;
             }
-            .item img {
-                margin-right: 25px;
-                max-width: calc(100vw - 50px);
-                height: auto;
-                border-radius: 1vw;
-            }
         }    
+        
         @media (orientation: landscape) {
+            .container {
+                flex-direction: row;
+            }
+            .item {
+                flex: 1 1 0;
+            }
             .item img {
-                margin: 0px;
-                max-width:800px;
-                height: auto;
-                border-radius: 1vw;
+                max-width: 800px;
             }
         }
         .dropdown-container {
