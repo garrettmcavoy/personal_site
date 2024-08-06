@@ -79,23 +79,17 @@
             text-decoration: none;
         }
 
-        /* New hover styles */
+        /* Hover styles for non-touch devices */
         @media (hover: hover) {
             a:hover, .dropdown-toggle:hover {
                 color: grey;
             }
         }
 
-        html:not(.touch-device) a:hover, 
-        html:not(.touch-device) .dropdown-toggle:hover {
+        /* Styles for open dropdowns and tapped links on all devices */
+        .dropdown-container.open .dropdown-toggle,
+        a.tapped {
             color: grey;
-        }
-
-        /* Disable hover effects on touch devices */
-        @media (hover: none) and (pointer: coarse) {
-            a:hover, .dropdown-toggle:hover, a:active, .dropdown-toggle:active {
-                color: black !important;
-            }
         }
 
         /* Remove tap highlight on touch devices */
@@ -139,6 +133,7 @@
     
     <script>
         const toggles = document.querySelectorAll('.dropdown-toggle');
+        const links = document.querySelectorAll('a');
         
         toggles.forEach(toggle => {
             toggle.addEventListener('click', function() {
@@ -148,17 +143,23 @@
             });
         });
 
-        // New JavaScript to handle touch devices
-        document.addEventListener('touchstart', function() {}, true);
+        links.forEach(link => {
+            link.addEventListener('touchstart', function(e) {
+                this.classList.add('tapped');
+            });
+            link.addEventListener('touchend', function(e) {
+                setTimeout(() => {
+                    this.classList.remove('tapped');
+                }, 300); // Remove the class after 300ms
+            });
+        });
 
-        function addTouchClass() {
-            document.documentElement.classList.add('touch-device');
-        }
-
-        if ('ontouchstart' in document.documentElement) {
-            addTouchClass();
-        }
+        // Prevent default touch behavior on links
+        document.addEventListener('touchstart', function(e) {
+            if (e.target.tagName === 'A') {
+                e.preventDefault();
+            }
+        }, {passive: false});
     </script>
-    
 </body>
 </html>
