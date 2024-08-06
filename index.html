@@ -156,16 +156,27 @@
     
     <script>
         const toggles = document.querySelectorAll('.dropdown-toggle');
-        const links = document.querySelectorAll('a');
         
         toggles.forEach(toggle => {
             toggle.addEventListener('click', function() {
                 const container = toggle.parentElement;
+                
+                // Close all dropdowns
+                document.querySelectorAll('.dropdown-container').forEach(dropdown => {
+                    if (dropdown !== container) {
+                        dropdown.classList.remove('open');
+                    }
+                });
+                
+                // Toggle the clicked dropdown
                 const isOpen = container.classList.contains('open');
                 container.classList.toggle('open', !isOpen);
             });
         });
 
+        // The following JavaScript handles touch devices and link tap highlighting
+        const links = document.querySelectorAll('a');
+        
         links.forEach(link => {
             link.addEventListener('touchstart', function(e) {
                 this.classList.add('tapped');
