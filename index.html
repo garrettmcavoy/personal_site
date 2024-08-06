@@ -31,6 +31,13 @@
             margin-top: 0px;
         }
         @media (orientation: portrait) {
+            .container {
+                flex-direction: column;
+            }
+            .item:last-child {
+                order: 1;
+                margin-bottom: 25px;
+            }
             .item img {
                 margin-right: 25px;
                 max-width: calc(100vw - 50px);
