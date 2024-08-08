@@ -86,7 +86,7 @@
             margin-left: 3px;
             color: black;
             text-decoration: none;
-            display: inline;
+            display: inline-block; /* Ensure the padding is applied properly */
         }
 
         .highlight {
@@ -98,13 +98,12 @@
             right: 0;
             z-index: 0;
             padding: 10px;
-            height: 0;
-            opacity: 0;
-            transition: height 0.3s ease, opacity 0.3s ease;
+            height: auto;
+            opacity: 1;
+            transition: opacity 0.3s ease;
         }
 
-        .dropdown-container.open .highlight {
-            height: calc(100% - 20px); /* Adjust as needed */
+        .dropdown-container:hover .highlight {
             opacity: 1;
         }
 
@@ -117,11 +116,12 @@
             z-index: 1;
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease;
+            transition: max-height 0.3s ease, padding 0.3s ease;
         }
 
         .dropdown-container.open .dropdown-content {
             max-height: 300px; /* Adjust as needed */
+            padding-top: 10px; /* Add space for the content */
         }
 
         a {
@@ -135,8 +135,7 @@
             }
         }
 
-        .dropdown-container.open .dropdown-toggle,
-        a.tapped {
+        .dropdown-container.open .dropdown-toggle {
             color: grey;
         }
 
