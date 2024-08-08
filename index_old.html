@@ -7,7 +7,7 @@
     <style>
         body {
             margin: 25px;
-            height: 100vh;
+            height: 100vh; /* Ensusre the body takes the full viewport height */
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -29,8 +29,8 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
-            flex: 1;
-            position: relative;
+            flex: 1; /* Allow the container to take available space */
+            position: relative; /* Required for absolute positioning of the image */
         }
 
         .item {
@@ -40,18 +40,18 @@
         .item img {
             max-width: 100%;
             height: auto;
-            position: absolute;
+            position: absolute; /* Position the image at the bottom */
             bottom: 0;
         }
         
         @media (orientation: portrait) {
             .container {
                 flex-direction: column;
-                justify-content: flex-start;
+                justify-content: flex-start; /* Align text at the top */
             }
 
             .item:last-child img {
-                max-width: calc(100vw - 30px);
+                max-width: calc(100vw - 30px); /* Ensure image is within viewport margins */
                 position: fixed;
                 bottom: 15px;
                 left: 15px;
@@ -67,50 +67,26 @@
             }
             .item img {
                 max-width: 800px;
-                position: static;
+                position: static; /* Ensure image positioning is static in landscape */
             }
         }
 
-        /* Highlight Background with Rounded Corners */
         .dropdown-container {
-            position: relative;
+            margin-top: 0px;
+            margin-bottom: 5px;
         }
 
         .dropdown-toggle {
-            position: relative;
-            z-index: 1;
-            padding: 10px;
-            cursor: pointer;
             font-size: 18px;
             margin-left: 3px;
+            cursor: pointer;
             color: black;
             text-decoration: none;
             display: inline;
         }
 
-        .highlight {
-            display: none;
-            background-color: lightgrey;
-            border-radius: 10px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 0;
-            padding: 10px;
-        }
-
-        .dropdown-container:hover .highlight,
-        .dropdown-container.open .highlight {
-            display: block;
-        }
-
-        .dropdown-container.open .highlight {
-            bottom: 0;
-        }
-
-        .dropdown-container:not(.open) .highlight {
-            height: calc(100% - 20px);
+        .dropdown-container.open .dropdown-toggle {
+            color: grey;
         }
 
         .dropdown-content {
@@ -118,8 +94,6 @@
             margin-top: 10px;
             padding-left: 15px;
             margin-bottom: 15px;
-            position: relative;
-            z-index: 1;
         }
 
         .dropdown-container.open .dropdown-content {
@@ -131,17 +105,20 @@
             text-decoration: none;
         }
 
+        /* Hover styles for non-touch devices */
         @media (hover: hover) {
             a:hover, .dropdown-toggle:hover {
                 color: grey;
             }
         }
 
+        /* Styles for open dropdowns and tapped links on all devices */
         .dropdown-container.open .dropdown-toggle,
         a.tapped {
             color: grey;
         }
 
+        /* Remove tap highlight on touch devices */
         a, .dropdown-toggle {
             -webkit-tap-highlight-color: transparent;
         }
@@ -153,33 +130,28 @@
             <h1>Garrett McAvoy</h1>
             <p><a href="https://en.wikipedia.org/wiki/California" target="_blank">California, USA</a></p>
             <p><a href="mailto:garrettmcavoy@gmail.com">garrettmcavoy@gmail.com</a></p>
-            
             <div class="dropdown-container">
-                <div class="highlight"></div>
+                <br>
+                <br>
                 <div class="dropdown-toggle">Experience</div>
                 <div class="dropdown-content">
-                    <p>• Apple - Internship, Manufacturing Design Engineer</p>
-                    <p>• WL Gore & Associates - Internship, Design & Automation Engineer</p>
+                    <p>•   Apple - Internship, Manufacturing Design Engineer</p>
+                    <p>•   WL Gore & Associates - Internship, Design & Automation Engineer</p>
                 </div>
             </div>
-
             <div class="dropdown-container">
-                <div class="highlight"></div>
                 <div class="dropdown-toggle">Photography</div>
                 <div class="dropdown-content">
                     <p><a href="https://garrettmcavoy.github.io/murex" target="_blank">Murex</a></p>
                 </div>
             </div>
-
             <div class="dropdown-container">
-                <div class="highlight"></div>
                 <div class="dropdown-toggle">Other Projects</div>
                 <div class="dropdown-content">
                     <p><a href="https://garrettmcavoy.github.io/murex" target="_blank">Murex</a></p>
                 </div>
             </div>
         </div>
-        
         <div class="item">
             <img src="img.jpeg" alt="Your Image">
         </div>
@@ -205,6 +177,7 @@
             });
         });
 
+        // The following JavaScript handles touch devices and link tap highlighting
         const links = document.querySelectorAll('a');
         
         links.forEach(link => {
@@ -214,19 +187,20 @@
             link.addEventListener('touchend', function(e) {
                 setTimeout(() => {
                     this.classList.remove('tapped');
-                }, 300);
+                }, 300); // Remove the class after 300ms
             });
         });
 
+        // Detect if it's a touch device
         const isTouchDevice = 'ontouchstart' in document.documentElement;
 
         if (isTouchDevice) {
             links.forEach(link => {
                 link.addEventListener('click', function(e) {
-                    e.preventDefault();
+                    e.preventDefault(); // Prevent immediate navigation
                     this.classList.add('tapped');
                     setTimeout(() => {
-                        window.location.href = this.href;
+                        window.location.href = this.href; // Navigate after a short delay
                     }, 30);
                 });
             });
