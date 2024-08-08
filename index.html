@@ -98,7 +98,9 @@
             right: 0;
             z-index: 0;
             padding: 10px;
-            height: auto; /* Change this to 'auto' */
+            height: 0; /* Initialize height to 0 */
+            overflow: hidden;
+            transition: height 0.3s ease-in-out; /* Add transition */
         }
 
         .dropdown-container:hover .highlight,
@@ -107,7 +109,7 @@
         }
 
         .dropdown-container.open .highlight {
-            display: block;
+            height: auto; /* Set height to auto when open */
         }
 
         .dropdown-content {
