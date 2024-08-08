@@ -74,6 +74,7 @@
         /* Highlight Background with Rounded Corners */
         .dropdown-container {
             position: relative;
+            overflow: hidden;
         }
 
         .dropdown-toggle {
@@ -89,7 +90,6 @@
         }
 
         .highlight {
-            display: none;
             background-color: lightgrey;
             border-radius: 10px;
             position: absolute;
@@ -98,32 +98,30 @@
             right: 0;
             z-index: 0;
             padding: 10px;
-        }
-
-        .dropdown-container:hover .highlight,
-        .dropdown-container.open .highlight {
-            display: block;
+            height: 0;
+            opacity: 0;
+            transition: height 0.3s ease, opacity 0.3s ease;
         }
 
         .dropdown-container.open .highlight {
-            bottom: 0;
-        }
-
-        .dropdown-container:not(.open) .highlight {
-            height: calc(100% - 20px);
+            height: calc(100% - 20px); /* Adjust as needed */
+            opacity: 1;
         }
 
         .dropdown-content {
-            display: none;
+            display: block;
             margin-top: 10px;
             padding-left: 15px;
             margin-bottom: 15px;
             position: relative;
             z-index: 1;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
         }
 
         .dropdown-container.open .dropdown-content {
-            display: block;
+            max-height: 300px; /* Adjust as needed */
         }
 
         a {
